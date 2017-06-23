@@ -1,0 +1,14 @@
+##### Creating a new VM on GCE following the tutorial
+
+# Create the new instance
+gcloud compute --project "natural-choir-171605" instances create "instance-2" --zone "us-west1-b" --machine-type "n1-standard-1" --subnet "default" --maintenance-policy "MIGRATE" --service-account "<ACCT_INFO>" --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring.write","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" --tags "http-server" --image "debian-8-jessie-v20170619" --image-project "debian-cloud" --boot-disk-size "10" --boot-disk-type "pd-standard" --boot-disk-device-name "instance-2"
+
+# Enable HTTP
+gcloud compute --project "natural-choir-171605" firewall-rules create "default-allow-http" --allow tcp:80 --network "default" --source-ranges "0.0.0.0/0" --target-tags "http-server"
+
+
+### Install Docker
+https://cloud.google.com/compute/docs/containers/?hl=en_US&_ga=1.213017687.270913015.1496176990#installing
+
+### Create a VM image
+https://cloud.google.com/compute/docs/instances/create-start-instance
